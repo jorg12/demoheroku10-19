@@ -21,6 +21,6 @@ app.use(pictureRoutes);
 
 
 
-app.listen(3000, process.env.IP, function(){
+app.listen(process.env.PORT, function(){
     console.log("Server Has Started");
 });
