@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<% include partials/header %>
+
+
+<style>
+    #pictec{
+        height:250px;
+        width:300px;
+    }
+</style>
+<div class="container">
+    <header class="jumbotron">
+        <h1>PicMap</h1>
+        <p>View images from all over the world</p>
+        <p>
+            <a class="btn btn-primary btn-large" href="/pictures/new">Add New Image</a>
+        </p>
+        <!--<div>-->
+          <!--<input id="filesubmit" type="file" class="btn btn-primary btn-large" accept="image/*"/>-->
+          <!--<button class="file-submit">Upload</button>-->
+        <!--</div>-->
+    </header>
+
+    <div class="row text-center">
+        <% picture.forEach(function(picture){ %>
+        <div class="col-md-3 col-sm-6">
+            <div class="profile-pic">
+                <img id="pictec" class="img-thumbnail" src="<%= picture.image %>" alt="">
+                <div class="caption">
+                    <h4> <%= picture.name %></h4>
+                </div>
+                     <a href="/pictures/<%=picture._id%>" class="btn btn-primary"> More info </a>
+                </p>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+
+        <h1 align="center" class="mapBOX">Mapbox</h1>
+    <div id='map' style='width: 100%; height: 650px; align: center'></div>
+</div>
+
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic29mdHdhcmVncm91cDEiLCJhIjoiY2puYnJvaHB3MDcyMzN3cGViZTBhYWt2aSJ9.YLw1vNk6opvVk6PwknR0cQ';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v10'
+        });
+    </script>
+
+
+<% include partials/footer %>

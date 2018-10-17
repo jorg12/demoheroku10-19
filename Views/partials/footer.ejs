@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD-oUfdgT5lcm6DINHWPH2PnFiYu-A0jFE",
+    authDomain: "picmap-13b58.firebaseapp.com",
+    databaseURL: "https://picmap-13b58.firebaseio.com",
+    projectId: "picmap-13b58",
+    storageBucket: "picmap-13b58.appspot.com",
+    messagingSenderId: "73778479292"
+  };
+  firebase.initializeApp(config);
+    //const storageService = firebase.storage();
+    //const storageRef = storageService.ref();
+  // var filesubmit = document.getElementByID('filesubmit');
+  // var dbRef = firebase.storage().ref().child('text');
+  // dbRef.on('value', snap => filesubmit.innerText = snap.val());
+
+    //document.querySelector('.file-select').addEventListener('change', handleFileUploadChange);
+    //document.querySelector('.file-submit').addEventListener('click', handleFileUploadSubmit);
+
+    const ref = firebase.storage().ref();
+    const file = document.querySelector('#filesubmit').files[0];
+    const name = (+new Date()) + '-' + file.name;
+    const metadata = {
+      contentType: file.type
+    };
+    const task = ref.child(name).put(file, metadata);
+    task
+      .then(snapshot => snapshot.ref.getDownloadURL())
+      .then((url) => {
+        console.log(url);
+        document.querySelector('#filesubmit').src = url;
+      })
+      .catch(console.error);
+
+</script>
+</body>
+</html>
